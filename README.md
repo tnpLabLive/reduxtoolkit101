@@ -20,6 +20,6 @@ npm install react-redux
 
 
 
-## Project Link
+## Project Link of Day 1
 
 eg. https://deepakkumar.work
