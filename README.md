@@ -11,3 +11,11 @@ React bindings:
 npm install react-redux
 
 ```
+
+##### How to setup Redux Toolkit
+
+###### 1. Create Slice (eg. counterSlice)
+###### 2. Create Store(eg. Here you have to import counterSlice and config store)
+###### 3. Provide store to Root component(eg. index.js)
+
+
