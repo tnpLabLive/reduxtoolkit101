@@ -7,7 +7,7 @@ npm i react-router-dom@6.3.0
 For Redux toolkit
 npm install @reduxjs/toolkit
 
-React bindings:
+For React bindings:
 npm install react-redux
 
 ```
@@ -16,7 +16,8 @@ npm install react-redux
 
 ###### 1. Create Slice (eg. counterSlice)
 
-```
+```Javascript
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -44,7 +45,8 @@ export const { incCount, descCount } = countSlice.actions;
 ```
 ###### 2. Create Store(eg. Here you have to import counterSlice and config store)
 
-```
+```Javascript
+
 import { configureStore } from "@reduxjs/toolkit";
 import CountSlice from "./features/CountSlice";
 
@@ -59,7 +61,8 @@ export default store;
 ```
 ###### 3. Provide store to Root component(eg. index.js)
 
-```
+```Javascript
+
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -70,7 +73,8 @@ import store from "./store/store";
 ```
 ###### 4. How to use initialState data into component
 
-```
+```Javascript
+
 import { useDispatch, useSelector } from "react-redux";
 import { descCount, incCount } from "./store/features/CountSlice";
 
