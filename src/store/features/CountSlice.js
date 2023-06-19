@@ -4,6 +4,9 @@ const initialState = {
   counter12: 1,
 };
 
+
+
+
 const countSlice = createSlice({
   name: "countSlice",
   initialState,
@@ -12,8 +15,8 @@ const countSlice = createSlice({
       state.counter12 = state.counter12 + action.payload;
     },
     descCount: (state, action) => {
-      console.log('action:', action)
-      state.counter12 = state.counter12 * action.payload.value;
+
+      state.counter12 = state.counter12 - action.payload.value;
     },
   },
 });
