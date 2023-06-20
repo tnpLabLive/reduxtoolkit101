@@ -1,17 +1,22 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProductFiltered,
   getProductList,
+  getProductListError,
+  getProductListLoading,
 } from "./store/features/ProductSlice";
 
 function ApiCall() {
   const productData = useSelector((state) => state.product.productData);
 
-  const { productData: pData, productDataGreaterThanHundred } = useSelector(
-    (state) => state.product
-  );
+  const {
+    productData: pData,
+    productDataGreaterThanHundred,
+    productDataError,
+    productDataLoading,
+  } = useSelector((state) => state.product);
 
   console.log("pData:", pData);
   console.log("productData:", productData);
@@ -24,8 +29,15 @@ function ApiCall() {
   }, []);
 
   const getProductListFetch = async () => {
-    const { data } = await axios.get("https://fakestoreapi.com/products");
-    dispatch(getProductList(data));
+    try {
+      dispatch(getProductListLoading(true));
+      const { data } = await axios.get("https://fakestoreapi.com/products");
+      dispatch(getProductList(data));
+      dispatch(getProductListLoading(false));
+    } catch (error) {
+      dispatch(getProductListError("Fetching error"));
+      dispatch(getProductListLoading(false));
+    }
   };
 
   const getProductListFilteredFetch = async () => {
@@ -33,25 +45,31 @@ function ApiCall() {
     dispatch(getProductFiltered(data));
   };
 
+  if (productDataLoading) {
+    return <h1>loading...</h1>;
+  }
+  
   return (
     <div>
       ApiCall
-      {productDataGreaterThanHundred.map((value, index) => {
-        return (
-          <div
-            style={{
-              backgroundColor: "grey",
-              padding: "20px",
-              marginTop: "4px",
-            }}
-            key={index}
-          >
-            <p>Count: {index + 1}</p>
-            <p>Title: {value.title}</p>
-            <p>Price: {value.price}</p>
-          </div>
-        );
-      })}
+      {productDataError && <p>{productDataError}</p>}
+      {!productDataError &&
+        productDataGreaterThanHundred.map((value, index) => {
+          return (
+            <div
+              style={{
+                backgroundColor: "grey",
+                padding: "20px",
+                marginTop: "4px",
+              }}
+              key={index}
+            >
+              <p>Count: {index + 1}</p>
+              <p>Title: {value.title}</p>
+              <p>Price: {value.price}</p>
+            </div>
+          );
+        })}
     </div>
   );
 }

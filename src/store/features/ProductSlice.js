@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   productData: [],
   productDataGreaterThanHundred: [],
+  productDataError:"",
+  productDataLoading:false
+
 };
 
 const productSlice = createSlice({
@@ -13,6 +16,14 @@ const productSlice = createSlice({
       state.productData = action.payload;
     },
 
+    getProductListError: (state, action) => {
+      state.productDataError = action.payload;
+    },
+
+    getProductListLoading: (state, action) => {
+      state.productDataLoading = action.payload;
+    },
+
     getProductFiltered: (state, action) => {
       state.productDataGreaterThanHundred = action.payload.filter((value) => value.price > 100);
     },
@@ -20,4 +31,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { getProductList, getProductFiltered } = productSlice.actions;
+export const { getProductList, getProductFiltered, getProductListError, getProductListLoading } = productSlice.actions;

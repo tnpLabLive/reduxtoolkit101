@@ -15,6 +15,7 @@ function Home() {
       <h2>App Hello World! data {data}</h2>
       <h2>App Hello World! Redux {counter12}</h2>
       <button onClick={() => navigate("/api")}>API Page</button>
+      <button onClick={() => navigate("/async-api")}>createAsyncThunk API Page</button>
       <br />
       <br />
       <br />
